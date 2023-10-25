@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+
+    <header style="background-color: #efefef;"></header>
+
+    <section class="login py-5">
+        <div class="container">
+            <div class="card mx-auto w-50">
+                <div class="card-body">
+                    <h5 class="card-title">Login</h5>
+                    <form id="login">
+                        <div class="form-group mb-3">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" class="form-control" id="email" placeholder="john@smith.com" />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" class="form-control" id="password" placeholder="*******" />
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-outline-primary">Login</button>
+                        <a href="register.html" class="btn btn-sm btn-link">Register</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="bg-dark"></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="module">
+        import {initHeader} from './components/Header.js';
+        import {initFooter} from './components/Footer.js';
+
+        initHeader(document.querySelector('header'))
+        initFooter(document.querySelector('footer'))
+
+        // if loggedin redirect to dashboard
+        const user_is_loggedin = localStorage.getItem('loggedin_user')
+
+        if(user_is_loggedin != null) {
+            window.location.href = 'http://127.0.0.1:5500/dashboard.html'
+        }
+
+        // login
+        document.querySelector('#login').addEventListener('submit', e => {
+            e.preventDefault()
+            const users = (localStorage.getItem('users') == null) ? [] : JSON.parse(localStorage.getItem('users')) 
+            let errors = []
+
+            const user = {
+                email: e.target.elements[0].value,
+                password: e.target.elements[1].value
+            }
+
+            if(users.length > 0) {
+                let user_loggedin = false
+                for(let u of users) {
+                    if(u.email == user.email && u.password == user.password) {
+                        user_loggedin = true
+                        break
+                    }
+                }
+
+                if(user_loggedin) {
+                    localStorage.setItem('loggedin_user', user.email)
+                    window.location.href = 'http://127.0.0.1:5500/dashboard.html'
+                } else {
+                    alert('Credentials are incorrect!')
+                }
+            } else {
+                alert('User is not registered!')
+            }
+        })
+    </script>
+
+    <!-- scroll text -->
+    <script type="text/javascript" src="./assets/js/xbMarquee.js"></script>
+    <script type="text/javascript">
+        function init() { ltr_marquee.start(); }
+        var ltr_marquee_Text = 'Apple Company <b>Call 1-800-MY-APPLE.</b> United States';
+        var ltr_marquee_Direction = 'right';
+        var ltr_marquee_Contents='<span style="font-family:Comic Sans MS;font-size:12pt;white-space:nowrap;">' + ltr_marquee_Text + '</span>';
+        ltr_marquee = new xbMarquee('ltr_marquee', '29px', '90%', 6, 100, ltr_marquee_Direction, 'scroll', ltr_marquee_Contents);
+        window.setTimeout( init, 200);
+    </script>
+    
+    <!-- scroll id -->
+    <script src="./assets/js/index.js"></script>
+</body>
+</html>

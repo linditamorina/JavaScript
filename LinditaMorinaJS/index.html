@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="icon" type="image/png" href="./assets/img/icon.png">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Home</title>
+</head>
+<body>
+    <header class="header" style="background-color: #efefef;"></header>
+
+    <main id="main"></main>
+
+    <section class="images"></section>
+
+    <section class="slider"></section>
+
+    <footer class="bg-dark"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="module">
+        import {initHeader} from './components/Header.js';
+        initHeader(document.querySelector('header'));
+
+        import {initMain} from './components/Main.js';
+        initMain(document.querySelector('main'));
+
+        import {initSection} from './components/Section.js'
+        initSection(document.querySelector('section'))
+
+        import {initSlider} from './components/Slider.js'
+        initSlider(document.querySelector('.slider'))
+
+        import {initFooter} from './components/Footer.js'
+        initFooter(document.querySelector('footer'))
+    </script>
+
+    <!-- footer scroll text -->
+    <script type="text/javascript" src="./assets/js/xbMarquee.js"></script>
+    <script type="text/javascript">
+        function init() { ltr_marquee.start(); }
+        var ltr_marquee_Text = 'Apple Company <b>Call 1-800-MY-APPLE.</b> United States';
+        var ltr_marquee_Direction = 'right';
+        var ltr_marquee_Contents='<span style="font-family:Comic Sans MS;font-size:12pt;white-space:nowrap;">' + ltr_marquee_Text + '</span>';
+        ltr_marquee = new xbMarquee('ltr_marquee', '29px', '90%', 6, 100, ltr_marquee_Direction, 'scroll', ltr_marquee_Contents);
+        window.setTimeout( init, 200);
+    </script>
+
+    <script src="./assets/js/index.js"></script>
+</body>
+</html>
